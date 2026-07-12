@@ -1,10 +1,10 @@
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
-        hash = {}
-        for i in range(0,len(nums)):
-            hash[nums[i]] = 1
+        total_sum = 0
+        for num in nums:
+            total_sum -= num
         
-        for val in range(0,len(nums)+1):
-            if val not in hash:
-                return val
-        return False
+        for num in range(len(nums)+1):
+            total_sum += num
+        return total_sum
+        
