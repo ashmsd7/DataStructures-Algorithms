@@ -1,19 +1,18 @@
 class Solution:
     def scheduleCourse(self, courses: List[List[int]]) -> int:
-        courses = sorted(courses, key = lambda x:x[1])   
+        courses.sort(key = lambda x:x[1])
 
-        current_day = 0
         selected = []
+        current_day = 0
+        
+        for duration , deadline in courses:
+            current_day+= duration
+            heapq.heappush(selected,-duration)
 
-        for duration,deadline in courses:
-            selected.append(duration)
-            current_day+=duration
-
-            if deadline < current_day:
-                longest_course = max(selected)
-                selected.remove(longest_course)
-                current_day-=longest_course
+            if current_day > deadline:
+                longest = -heapq.heappop(selected)
+                current_day-=longest
+            
         
         return len(selected)
-
         
