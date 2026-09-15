@@ -1,26 +1,20 @@
 class Solution:
     def countSubstrings(self, s: str) -> int:
-        n = len(s)
-        dp = [[True] * n for _ in range(n)]
-
+        total_pal = 0
+        for i in range(len(s)):
+            even = self.CheckPalindrome(s,i,i+1)
+            odd = self.CheckPalindrome(s,i,i)
+            total_pal+= even + odd
+        
+        return total_pal
+    
+    def CheckPalindrome(self,s,start,end):
         count = 0
+        while start >= 0 and end < len(s) and s[start] == s[end]:
+            count+=1
+            start-=1
+            end+=1
         
-        for length in range(1,n+1):
-            for i in range(n-length+1):
-                j = i + length - 1
-                if length == 1:
-                    dp[i][j] = True
-                
-                elif length == 2:
-                    dp[i][j] = (s[i] == s[j])
-                
-                else:
-                    dp[i][j] = (dp[i+1][j-1]) and (s[i] == s[j])
-                
-                if dp[i][j] == True:
-                    count+=1
-
         return count
-        
 
         
