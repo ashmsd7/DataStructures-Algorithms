@@ -1,5 +1,11 @@
 class Solution:
     def maxNumOfSubstrings(self, s: str) -> list[str]:
+
+        # So i got TLE for using min() and max() functions so used two hashmaps to store indices of first and last occurences of each fresh char. My previous approach was to store a list of all indices then retrieve max from it.
+
+        #hash -> {a:[0,4,7]} -> max(hash[a])
+
+        
         first = {}
         last = {}
 
