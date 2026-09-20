@@ -1,5 +1,9 @@
 class Solution:
     def maximumSwap(self, num: int) -> int:
+
+        #Tested my entire python proficiency in str and int conversions with this question bruh ://
+
+        
         str_int = list(str(num))
 
         hasher ={}
