@@ -1,39 +1,33 @@
 class Solution:
     def minOperations(self, nums: list[int], x: int) -> int:
-        Arr_sum = 0
-        for num in nums:
-            Arr_sum+= num
-        
+        arr_sum = sum(nums)
+        target = arr_sum - x
+        n = len(nums)
+
+        prefix = [0] * (n+1)
+
+        hasher = {0:0}
         max_len = 0
-        left = 0
-        curr_sum = 0
-        Target = Arr_sum - x
 
-        if Target<0:
+        if target < 0 :
             return -1
+        if target == 0:
+            return n
 
-        if Target == 0:
-            return len(nums)
+        for i in range(n):
+            prefix[i+1] = prefix[i] + nums[i]
 
-        for right in range(len(nums)):
-            curr_sum+= nums[right]
-            while curr_sum > Target:
-                curr_sum-=nums[left]
-                left+=1
+        for i in range(n+1):
+            needed = prefix[i] - target
+            if needed in hasher:
+                curr_len = i - hasher[needed]
+                max_len = max(max_len , curr_len)
+
+            if prefix[i] not in hasher:
+                hasher[prefix[i]] = i
             
-            if curr_sum == Target:
-                max_len = max(max_len,right-left+1)
-    
         if max_len == 0:
             return -1
-
-        return len(nums) - max_len
-
-
-            
-
-
-
-
-
         
+        return n - max_len
+
