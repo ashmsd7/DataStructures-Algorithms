@@ -1,5 +1,8 @@
 class Solution:
     def evaluate(self, s: str, knowledge: list[list[str]]) -> str:
+
+        #So parsing the current string entirely. Whenever u find '(' you start the loop and run it until you reach the ')'. Store the current value in some variable and add it to a resultant variable. :)
+        
         hasher = {}
         for k in knowledge:
             hasher[k[0]] = k[1]
