@@ -21,7 +21,7 @@ class Solution:
                 seats+=1
 
                 if seats%2!=0 and seats>2 :
-                    res = res*(curr+1)
+                    res = res*(curr+1) % MOD
                     curr = 0
             
             else:
