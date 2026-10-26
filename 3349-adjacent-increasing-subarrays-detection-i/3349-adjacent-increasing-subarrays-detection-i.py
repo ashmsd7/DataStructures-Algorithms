@@ -1,6 +1,11 @@
 class Solution:
     def hasIncreasingSubarrays(self, nums: List[int], k: int) -> bool:
+
+        #Brute force -> Generate all k length subarrays that are adjacent and compare them
+
+        
         n = len(nums)
+
 
         for i in range(n - 2*k + 1):
             first = nums[i:i+k]
