@@ -5,20 +5,21 @@ class Solution:
 
         #use a global visited set to keep track of islands that have already been visited.
 
+        #as an optimization, we can directly eliminate visited set, and instead change already visited cells to '0' in the grid which prevent our dfs from revisiting.
+
         rows = len(grid)
         cols = len(grid[0])
 
-        visited = set()
-
+        
         def dfs(r,c):
             if r<0 or r>=rows or c<0 or c>=cols:
                 return 0
             
-            if grid[r][c] == 0 or (r,c) in visited:
+            if grid[r][c] == 0 :
                 return 0
             
-            visited.add((r,c))
             val = grid[r][c]
+            grid[r][c] = 0
 
             up = dfs(r-1,c)
             down = dfs(r+1,c)
@@ -30,7 +31,7 @@ class Solution:
         cnt = 0 
         for r in range(rows):
             for c in range(cols):
-                if grid[r][c]!=0 and(r,c) not in visited:
+                if grid[r][c]!=0 :
                     res = dfs(r,c)
                     if res%k==0:
                         cnt+=1
